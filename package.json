@@ -1,0 +1,26 @@
+{
+  "name": "nox-ai-local-web",
+  "version": "0.2.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "dev:api": "node src/server.mjs",
+    "build": "vite build",
+    "start": "node src/server.mjs",
+    "check": "node --check src/server.mjs && node --check src/main.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "@qdrant/js-client-rest": "^1.15.0",
+    "@supabase/supabase-js": "^2.57.0",
+    "@upstash/redis": "^1.35.0",
+    "@vercel/speed-insights": "^1.2.0",
+    "openai": "^5.0.0"
+  },
+  "devDependencies": {
+    "vite": "^7.1.7"
+  }
+}

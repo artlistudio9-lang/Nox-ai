@@ -1,0 +1,42 @@
+services:
+  nox-web:
+    build:
+      context: ./website
+    container_name: nox-ai-web
+    restart: unless-stopped
+    env_file:
+      - ./website/.env
+    environment:
+      PORT: 3030
+      QDRANT_URL: http://qdrant:6333
+      REDIS_URL: redis://:${REDIS_PASSWORD:-change-me-local-only}@redis:6379
+    ports:
+      - "127.0.0.1:3030:3030"
+    depends_on:
+      - qdrant
+      - redis
+
+  qdrant:
+    image: qdrant/qdrant:latest
+    container_name: nox-qdrant
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:6333:6333"
+      - "127.0.0.1:6334:6334"
+    volumes:
+      - qdrant_data:/qdrant/storage
+
+  # Local Redis-compatible cache/queue for development. Upstash itself is a hosted service.
+  redis:
+    image: redis:7-alpine
+    container_name: nox-redis
+    restart: unless-stopped
+    command: ["redis-server", "--appendonly", "yes", "--requirepass", "${REDIS_PASSWORD:-change-me-local-only}"]
+    ports:
+      - "127.0.0.1:6379:6379"
+    volumes:
+      - redis_data:/data
+
+volumes:
+  qdrant_data:
+  redis_data:

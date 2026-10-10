@@ -1,0 +1,24 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "nox-ai-local",
+  "version": "0.1.0",
+  "description": "Local-first NOX AI starter for developer workflows and integration readiness checks.",
+  "author": { "name": "NOX AI Project" },
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "NOX AI Local",
+        "shortDescription": "Local-first AI project assistant",
+        "longDescription": "A local-first starter for NOX AI with project health checks, safe integration planning, and developer workflow guidance. External integrations remain disabled until explicitly configured.",
+        "developerName": "NOX AI Project",
+        "category": "Developer Tools",
+        "capabilities": ["Interactive"],
+        "defaultPrompt": [
+          "Help me inspect the readiness of my NOX AI project.",
+          "Create a safe integration plan for GitHub, Vercel, Supabase, and OpenAI.",
+          "Review my local development setup and propose the next verified step."
+        ]
+      }
+    }
+  }
+}
